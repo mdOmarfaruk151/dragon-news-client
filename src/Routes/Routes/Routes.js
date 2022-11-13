@@ -5,6 +5,9 @@ import Home from "../../layout/Pages/Home/Home";
 import Login from "../../layout/Pages/Login/Login/Login";
 import Register from "../../layout/Pages/Login/Register/Register";
 import News from "../../layout/Pages/News/News/News";
+import Profile from "../../layout/Pages/Others/Profile/Profile";
+import TermsAndConditions from "../../layout/Pages/Others/TermsAndConditions/TermsAndConditions";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 export const routes = createBrowserRouter([
 
@@ -24,7 +27,7 @@ export const routes = createBrowserRouter([
         },
         {
             path: "/news/:id",
-            element: <News></News>,
+            element: <PrivateRoute><News></News></PrivateRoute>, //! private page
             loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
         },
         {
@@ -35,6 +38,15 @@ export const routes = createBrowserRouter([
             path: '/register',
             element: <Register></Register> ,
         },
+        {
+            path: '/terms',
+            element: <TermsAndConditions></TermsAndConditions>
+        },
+        {
+            path:'/profile',
+            element: <PrivateRoute><Profile></Profile></PrivateRoute>
+
+        }
 
              ],
     }

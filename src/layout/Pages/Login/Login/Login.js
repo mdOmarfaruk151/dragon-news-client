@@ -1,16 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../contexts/AuthProvider/AuthProvider';
 
 
 const Login = () => {
-    
+    //! for error show
+    const [error, setError] = useState('');
    //! get  function from AuthProvider
-   const {signIn}= useContext(AuthContext);
+   const {signIn, setLoading}= useContext(AuthContext);
    //! use for when login go to set page
    const navigate = useNavigate();
+
+   //! for set user location after user login
+   const location = useLocation();
+   const from = location.state?.from?.pathname || '/';
+  
 
    //! for login submit form
    const handleSubmit = event => {
@@ -24,9 +31,23 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         form.reset();
-        navigate('/');
+        setError('');
+        if(user.emailVerified){     //! if user verified then they access to news
+          navigate(from, {replace: true}); //! if user get access to news
+        }
+        else{
+          toast.error('Your Email is not Verified. Please Verify Your Email Address.');
+        }
+
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err)
+      setError(err.message);
+      })
+      .finally(()=>{
+        setLoading(false);
+
+      })
    }
 
     return (
@@ -46,7 +67,7 @@ const Login = () => {
         Login
       </Button>
       <Form.Text className="text-danger">
-          {/* We'll never share your email with anyone else. */}
+          {error}
         </Form.Text>
     </Form>
         </div>
