@@ -8,7 +8,7 @@ const Category = () => {
 
   return (
     <div>
-      <hr />
+      <hr className="mt-0"/>
       <h3 className='text-center'>This Category Has <span className="text-success">{categoryNews.length}</span> News. </h3>
       <hr />
       {

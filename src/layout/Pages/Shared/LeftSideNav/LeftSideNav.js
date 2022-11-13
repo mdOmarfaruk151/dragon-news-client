@@ -13,7 +13,7 @@ const LeftSideNav = () => {
 
   return (
     <div>
-      <hr />
+      <hr className="mt-0"/>
       <h4>All Category: {categories.length}</h4>
       <hr />
       {/* //! All Category with dynamic id */}

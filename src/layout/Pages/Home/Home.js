@@ -7,7 +7,7 @@ const Home = () => {
   const allNews = useLoaderData();
   return (
     <div>
-      <hr />
+      <hr className="mt-0"/>
       <h3 className="text-center">
         Dragon News Home: <span className="text-success">{allNews.length}</span>
       </h3>
