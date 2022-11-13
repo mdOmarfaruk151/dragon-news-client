@@ -16,11 +16,11 @@ const Header = () => {
   // console.log(user);
 
   //! for log out button
-  const handleLogOut = ()=>{
+  const handleLogOut = () => {
     logOut()
-    .then(()=>{})
-    .catch(error => console.log(error))
-  }
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
@@ -33,13 +33,23 @@ const Header = () => {
       >
         <Container>
           <Navbar.Brand>
-            <Link to="/">Dragon News</Link>
+            <Link
+              className="text-decoration-none border border-primary border-2 rounded p-2 text-white bg-secondary"
+              to="/"
+            >
+              Dragon News
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">All News</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
+              <Link
+                className="text-decoration-none btn btn-outline-primary"
+                to="/category/08"
+              >
+                All News
+              </Link>
+              {/* <Nav.Link href="#pricing">Pricing</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -52,24 +62,32 @@ const Header = () => {
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
             <Nav>
               <>
                 {user?.uid ? (
                   <>
-                    <Button className="btn btn-outline-danger me-2" variant="light" onClick={handleLogOut}>Log Out</Button>
+                    <Button
+                      className="btn btn-outline-danger me-2"
+                      variant="light"
+                      onClick={handleLogOut}
+                    >
+                      Log Out
+                    </Button>
                     <span className="me-2 ">{user?.displayName}</span>
                   </>
                 ) : (
                   <>
-                    <Link className="me-2" to="/login">Login</Link>
+                    <Link className="me-2" to="/login">
+                      Login
+                    </Link>
                     <Link to="/register">Register</Link>
                   </>
                 )}
               </>
 
-              <Link to='/profile'>
+              <Link to="/profile">
                 {user?.photoURL ? (
                   <Image
                     style={{ height: "40px" }}

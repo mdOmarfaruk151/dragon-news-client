@@ -8,7 +8,9 @@ const Category = () => {
 
   return (
     <div>
-      <h2>This is Category has News: {categoryNews.length}</h2>
+      <hr />
+      <h3 className='text-center'>This Category Has <span className="text-success">{categoryNews.length}</span> News. </h3>
+      <hr />
       {
         categoryNews.map(news => <NewsSummaryCard
             key={news._id}
